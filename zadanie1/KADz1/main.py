@@ -25,6 +25,11 @@ tabela_szerokosci_kielicha = Szer_kiel.squeeze()
 # tablica z indeksami gatunków
 tabela_ID_gatunkow = ID_Gat.squeeze()
 
+
+
 f.wyznacz_licznosc(tabela_ID_gatunkow)
-
-
+print(f.srednia_aryt(tabela_szerokosci_kielicha))
+print(f.mediana(tabela_dlugosci_platkow))
+print(tabela_dlugosci_platkow[74])
+print(f.kwartyl(tabela_szerokosci_kielicha))
+print(f.kwartyl(tabela_szerokosci_kielicha, 3))
