@@ -28,10 +28,4 @@ tabela_ID_gatunkow = ID_Gat.squeeze()
 tab = [1,2,3,4,5,6,7,7,7,7]
 
 f.wyznacz_licznosc(tabela_ID_gatunkow)
-print(f.srednia_aryt(tabela_dlugosci_platka))
-print(f.odch_stand(tabela_dlugosci_platka))
-print(f.srednia_aryt(tab))
-print(f.odch_stand(tab))
-print(f.mediana(tab))
-print(f.srednia_aryt(tabela_dlugosci_dzialki_kielicha))
-print(f.odch_stand(tabela_dlugosci_dzialki_kielicha))
+f.generuj_tabele_2(tabela_dlugosci_dzialki_kielicha,tabela_szerokosci_dzialki_kielicha,tabela_dlugosci_platka,tabela_szerokosci_platka)

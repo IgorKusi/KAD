@@ -148,5 +148,41 @@ def kwartyl(tabela_danych=None, numer=1):
         return mediana(wieksze_od_med)
 
 
+def generuj_tabele_2(tab_dl_kiel=None, tab_sz_kiel=None, tab_dl_plat=None, tab_sz_plat=None):
+
+    if tab_sz_plat is None:
+        tab_sz_plat = []
+    if tab_dl_plat is None:
+        tab_dl_plat = []
+    if tab_sz_kiel is None:
+        tab_sz_kiel = []
+    if tab_dl_kiel is None:
+        tab_dl_kiel = []
+
+    tabela, ax = plt.subplots()
+
+    # pogrubiam krawędzie tabeli
+    tabela.patch.set_visible(False)
+
+    # wyłączam widoczność osi
+    ax.axis('off')
+
+    kolumny = ["Cecha", "Minimum", "Śr.arytm(+- odch.stand.)", "Mediana (Q1-Q3)", "Maksimum"]
+
+    dane = [ ["Długość działki kielicha (cm)", mini(tab_dl_kiel), str(mediana(tab_dl_kiel)) + "(+-" + str(odch_stand(tab_dl_kiel)) + ")",
+              str(mediana(tab_dl_kiel))+"("+str(kwartyl(tab_dl_kiel, 1))+"-"+str(kwartyl(tab_dl_kiel,3)),maks(tab_dl_kiel)],
+             ["Szerekość działki kielicha (cm)",mini(tab_sz_kiel),str(mediana(tab_sz_kiel))+"(+-"+str(odch_stand(tab_sz_kiel))+")",
+              str(mediana(tab_sz_kiel))+"("+str(kwartyl(tab_sz_kiel, 1))+"-"+str(kwartyl(tab_sz_kiel,3)),maks(tab_sz_kiel)],
+             ["Szerekość działki kielicha (cm)",mini(tab_dl_plat),str(mediana(tab_dl_plat))+"(+-"+str(odch_stand(tab_dl_plat))+")",
+              str(mediana(tab_dl_plat))+"("+str(kwartyl(tab_dl_plat, 1))+"-"+str(kwartyl(tab_dl_plat,3)),maks(tab_dl_plat)],
+             ["Szerekość działki kielicha (cm)",mini(tab_sz_plat),str(mediana(tab_sz_plat))+"(+-"+str(odch_stand(tab_sz_plat))+")",
+              str(mediana(tab_sz_plat))+"("+str(kwartyl(tab_sz_plat, 1))+"-"+str(kwartyl(tab_sz_plat,3)),maks(tab_sz_plat)]]
+
+    df=pd.DataFrame(dane, columns=kolumny)
+
+    ax = plt.table(cellText=df.values, colLabels=df.columns, loc='center', cellLoc='center')
+    # tabela.tight_layout()
+    plt.show()
+
 
 
