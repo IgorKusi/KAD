@@ -100,10 +100,8 @@ def mediana(tabela_danych=None):
 
     sortuj_rosnaco(tabela_danych)
 
-    # TODO  NIE MAM POJECIA DLACZEGO TO WYWALA INDEX OUT OF RANGE ALE NIE WYTRZYMAM ZARAZ
-    if len(tabela_danych)%2 == 0:
-        wynik = round(tabela_danych[int(len(tabela_danych)/2)-1], 2)
-        return wynik
+    if len(tabela_danych)%2 == 1:
+        return round(tabela_danych[int(len(tabela_danych)/2)-1], 2)
 
     else:
         srodkowe_liczby = [tabela_danych[int(len(tabela_danych)/2)-1], tabela_danych[int(len(tabela_danych)/2)]]
@@ -121,7 +119,7 @@ def odch_stand(tabela_danych=None):
 
     wariancja=wariancja/len(tabela_danych)
 
-    return np.sqrt(wariancja)
+    return round(np.sqrt(wariancja),2)
 
 
 # parametr numer oznacza ktory kwartyl chcemy obliczyc, domyslnie 1
