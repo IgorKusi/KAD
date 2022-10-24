@@ -102,7 +102,8 @@ def mediana(tabela_danych=None):
 
     # TODO  NIE MAM POJECIA DLACZEGO TO WYWALA INDEX OUT OF RANGE ALE NIE WYTRZYMAM ZARAZ
     if len(tabela_danych)%2 == 0:
-        return round(tabela_danych[int(len(tabela_danych)/2)-1], 2)
+        wynik = round(tabela_danych[int(len(tabela_danych)/2)-1], 2)
+        return wynik
 
     else:
         srodkowe_liczby = [tabela_danych[int(len(tabela_danych)/2)-1], tabela_danych[int(len(tabela_danych)/2)]]
@@ -143,7 +144,7 @@ def kwartyl(tabela_danych=None, numer=1):
 
     elif numer == 3:
         wieksze_od_med = []
-        for i in range(int((len(tabela_danych)/2)+1)):
+        for i in range(int((len(tabela_danych))/2)-1,int((len(tabela_danych)))-1):
             if tabela_danych[i] > med:
                 wieksze_od_med.append(tabela_danych[i])
         return mediana(wieksze_od_med)
