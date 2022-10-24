@@ -27,14 +27,4 @@ tabela_ID_gatunkow = ID_Gat.squeeze()
 
 f.wyznacz_licznosc(tabela_ID_gatunkow)
 
-print("Badanie dlugosci platkow" '\n')
-f.wyznacz_max_min(tabela_dlugosci_platkow)
 
-print("Badanie szerokosci platkow" '\n')
-f.wyznacz_max_min(tabela_szerokosci_platkow)
-
-print("Badanie dlugosci kielicha" '\n')
-f.wyznacz_max_min(tabela_dlugosci_kielicha)
-
-print("Badanie szerokosci kielicha" '\n')
-f.wyznacz_max_min(tabela_szerokosci_kielicha)
