@@ -10,22 +10,18 @@ Dlug_plat = pd.read_csv(r'kad.csv', header=None, usecols=[2])
 Szer_plat = pd.read_csv(r'kad.csv', header=None, usecols=[3])
 ID_Gat = pd.read_csv(r'kad.csv', header=None, usecols=[4])
 
-# tablica z wartosciami długosci płatków
+
 tabela_dlugosci_dzialki_kielicha = Dlug_dzial_kiel.squeeze()
 
-# tabliza w wartościami szerokości płatków
 tabela_szerokosci_dzialki_kielicha = Szer_dzial_kiel.squeeze()
 
-# tablica z wartościami długości kielicha
 tabela_dlugosci_platka = Dlug_plat.squeeze()
 
-# tablica z wartościami szerokości kielicha
 tabela_szerokosci_platka = Szer_plat.squeeze()
 
-# tablica z indeksami gatunków
 tabela_ID_gatunkow = ID_Gat.squeeze()
 
-tab = [1,2,3,4,5,6,7,7,7,7]
+# ________________________________________________________________
 
 f.wyznacz_licznosc(tabela_ID_gatunkow)
 f.generuj_tabele_2(tabela_dlugosci_dzialki_kielicha,tabela_szerokosci_dzialki_kielicha,tabela_dlugosci_platka,tabela_szerokosci_platka)

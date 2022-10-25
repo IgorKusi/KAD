@@ -1,3 +1,4 @@
+import matplotlib
 import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
@@ -35,6 +36,9 @@ def wyznacz_licznosc(tabela_ID_gatunkow=None):
 
     populacjaIrysow = len(tabela_ID_gatunkow)
 
+    plt.rcParams["figure.figsize"] = [3.00, 2.50]
+    plt.rcParams["figure.autolayout"] = True
+
     tabela_licznosci, ax = plt.subplots()
 
     # pogrubiam krawędzie tabeli
@@ -54,6 +58,12 @@ def wyznacz_licznosc(tabela_ID_gatunkow=None):
     # TODO nie wiem jak zrobic zeby tabela sie rozciągała na cały obraz,  dokumentacja za duzo o tym nie mowi
 
     ax = plt.table(cellText=df.values, colLabels=df.columns, loc='center', cellLoc='center', colWidths=[0.3, 0.3])
+
+    #rozmiar czcionki
+    ax.auto_set_font_size(False)
+    ax.set_fontsize(7)
+
+    plt.savefig('Tabela1.pdf')
     tabela_licznosci.tight_layout()
     plt.show()
 
@@ -75,7 +85,7 @@ def mini(tabela_danych=None):
         tabela_danych = []
     mini = 9999.0
     for i in range(len(tabela_danych)):
-        if tabela_danych[i] > mini:
+        if tabela_danych[i] < mini:
             mini = tabela_danych[i]
     return mini
 
@@ -150,6 +160,9 @@ def kwartyl(tabela_danych=None, numer=1):
 
 def generuj_tabele_2(tab_dl_kiel=None, tab_sz_kiel=None, tab_dl_plat=None, tab_sz_plat=None):
 
+    #Skalowanie wielkosci obrazu
+    plt.rcParams["figure.figsize"] = [12.00,2.50]
+    #plt.rcParams["figure.autolayout"] = True
     if tab_sz_plat is None:
         tab_sz_plat = []
     if tab_dl_plat is None:
@@ -158,7 +171,6 @@ def generuj_tabele_2(tab_dl_kiel=None, tab_sz_kiel=None, tab_dl_plat=None, tab_s
         tab_sz_kiel = []
     if tab_dl_kiel is None:
         tab_dl_kiel = []
-
     tabela, ax = plt.subplots()
 
     # pogrubiam krawędzie tabeli
@@ -167,21 +179,28 @@ def generuj_tabele_2(tab_dl_kiel=None, tab_sz_kiel=None, tab_dl_plat=None, tab_s
     # wyłączam widoczność osi
     ax.axis('off')
 
+
     kolumny = ["Cecha", "Minimum", "Śr.arytm(+- odch.stand.)", "Mediana (Q1-Q3)", "Maksimum"]
 
     dane = [ ["Długość działki kielicha (cm)", mini(tab_dl_kiel), str(mediana(tab_dl_kiel)) + "(+-" + str(odch_stand(tab_dl_kiel)) + ")",
-              str(mediana(tab_dl_kiel))+"("+str(kwartyl(tab_dl_kiel, 1))+"-"+str(kwartyl(tab_dl_kiel,3)),maks(tab_dl_kiel)],
+              str(mediana(tab_dl_kiel))+"("+str(kwartyl(tab_dl_kiel, 1))+"-"+str(kwartyl(tab_dl_kiel,3))+")",maks(tab_dl_kiel)],
              ["Szerekość działki kielicha (cm)",mini(tab_sz_kiel),str(mediana(tab_sz_kiel))+"(+-"+str(odch_stand(tab_sz_kiel))+")",
-              str(mediana(tab_sz_kiel))+"("+str(kwartyl(tab_sz_kiel, 1))+"-"+str(kwartyl(tab_sz_kiel,3)),maks(tab_sz_kiel)],
-             ["Szerekość działki kielicha (cm)",mini(tab_dl_plat),str(mediana(tab_dl_plat))+"(+-"+str(odch_stand(tab_dl_plat))+")",
-              str(mediana(tab_dl_plat))+"("+str(kwartyl(tab_dl_plat, 1))+"-"+str(kwartyl(tab_dl_plat,3)),maks(tab_dl_plat)],
-             ["Szerekość działki kielicha (cm)",mini(tab_sz_plat),str(mediana(tab_sz_plat))+"(+-"+str(odch_stand(tab_sz_plat))+")",
-              str(mediana(tab_sz_plat))+"("+str(kwartyl(tab_sz_plat, 1))+"-"+str(kwartyl(tab_sz_plat,3)),maks(tab_sz_plat)]]
+              str(mediana(tab_sz_kiel))+"("+str(kwartyl(tab_sz_kiel, 1))+"-"+str(kwartyl(tab_sz_kiel,3))+")",maks(tab_sz_kiel)],
+             ["Długość płatka (cm)",mini(tab_dl_plat),str(mediana(tab_dl_plat))+"(+-"+str(odch_stand(tab_dl_plat))+")",
+              str(mediana(tab_dl_plat))+"("+str(kwartyl(tab_dl_plat, 1))+"-"+str(kwartyl(tab_dl_plat,3))+")",maks(tab_dl_plat)],
+             ["Szerekość płatka (cm)",mini(tab_sz_plat),str(mediana(tab_sz_plat))+"(+-"+str(odch_stand(tab_sz_plat))+")",
+              str(mediana(tab_sz_plat))+"("+str(kwartyl(tab_sz_plat, 1))+"-"+str(kwartyl(tab_sz_plat,3))+")",maks(tab_sz_plat)]]
 
     df=pd.DataFrame(dane, columns=kolumny)
 
-    ax = plt.table(cellText=df.values, colLabels=df.columns, loc='center', cellLoc='center')
-    # tabela.tight_layout()
+    ax = plt.table(cellText=df.values, colLabels=df.columns, loc='center', cellLoc='center', colWidths=[0.30,0.12,0.22,0.15,0.1])
+
+    #zmiana wielkosci czcionki
+    ax.auto_set_font_size(False)
+    ax.set_fontsize(10)
+
+    tabela.tight_layout()
+    plt.savefig('Tabela2.pdf')
     plt.show()
 
 
