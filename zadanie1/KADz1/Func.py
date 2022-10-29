@@ -1,9 +1,6 @@
-import matplotlib.pyplot as plt
 import numpy as np
-import pandas as pd
 
-# bubble sort
-# za wszystkie krzywdy sam przeprosze Boga
+
 def sortuj_rosnaco(tabela_danych=None):
     if tabela_danych is None:
         tabela_danych = []
@@ -15,6 +12,7 @@ def sortuj_rosnaco(tabela_danych=None):
 
     return
 
+# funkcja zwracająca najwiekszy element zbioru danych
 def maks(tabela_danych=None):
     if tabela_danych is None:
         tabela_danych = []
@@ -25,6 +23,7 @@ def maks(tabela_danych=None):
     return "{:.2f}".format(maks)
 
 
+# funkcja zwracająca najmniejszy element zbioru danych
 def mini(tabela_danych=None):
     if tabela_danych is None:
         tabela_danych = []
@@ -35,6 +34,7 @@ def mini(tabela_danych=None):
     return "{:.2f}".format(mini)
 
 
+# funkcja zwracajaca średnia arytmetyczna zbioru danych
 def srednia_aryt(tabela_danych=None):
     if tabela_danych is None:
         tabela_danych = []
@@ -48,6 +48,7 @@ def srednia_aryt(tabela_danych=None):
     return round(suma/licznik, 2)
 
 
+# funckja zwracająca mediane zbioru danych
 def mediana(tabela_danych=None):
 
     if tabela_danych is None:
@@ -62,6 +63,8 @@ def mediana(tabela_danych=None):
         srodkowe_liczby = [tabela_danych[int(len(tabela_danych)/2)-1], tabela_danych[int(len(tabela_danych)/2)]]
         return round(srednia_aryt(srodkowe_liczby), 2)
 
+
+# funkcja zwracająca wartość odchylenia standardowego zbioru danych
 def odch_stand(tabela_danych=None):
     if tabela_danych is None:
         tabela_danych = []
@@ -77,7 +80,8 @@ def odch_stand(tabela_danych=None):
     return "{:.2f}".format(round(np.sqrt(wariancja),2))
 
 
-# parametr numer oznacza ktory kwartyl chcemy obliczyc, domyslnie 1
+# funkcja zwracajaca wartosc danego kwartyla zbioru danych
+# parametr 'numer' oznacza ktory kwartyl chcemy obliczyc, domyslnie 1
 def kwartyl(tabela_danych=None, numer=1):
     if tabela_danych is None:
         tabela_danych = []
@@ -91,7 +95,7 @@ def kwartyl(tabela_danych=None, numer=1):
         for i in range(int((len(tabela_danych)/2)+1)):
             if tabela_danych[i] < med:
                 mn_od_med.append(tabela_danych[i])
-        return mediana(mn_od_med)   # "{:.2f}".format() - wymusza wypisywanie 2 liczb po przecinku
+        return mediana(mn_od_med)
     elif numer == 2:
         return med
 

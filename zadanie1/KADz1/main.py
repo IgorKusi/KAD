@@ -1,6 +1,5 @@
 import matplotlib.pyplot as plt
 import pandas as pd
-import Func as F
 import Tabele as T
 import Wykresy as W
 
@@ -29,25 +28,6 @@ tabela_ID_gatunkow = ID_Gat.squeeze()
 T.tabela1(tabela_ID_gatunkow)
 T.tabela2(tabela_dlugosci_dzialki_kielicha,tabela_szerokosci_dzialki_kielicha,tabela_dlugosci_platka,tabela_szerokosci_platka)
 
-# _______________________________________________________________
-# TODO przerobić to z maina na funkcje w pliku Wykresy.py
-# TODO dodać podpisy osi
-# TODO wykresy pudełkowe
-# TODO poprawić czytelność histogramów
+W.wykresy(Dlug_dzial_kiel,Szer_dzial_kiel,Dlug_plat,Szer_plat,tabela_dlugosci_dzialki_kielicha,tabela_szerokosci_dzialki_kielicha,tabela_dlugosci_platka,tabela_szerokosci_platka)
 
-plt.rcParams["figure.figsize"] = [10.00, 20.00]
-fig,ax = plt.subplots(4, 2, tight_layout=True)
-
-ax[0][0].hist(Dlug_dzial_kiel, bins=8)
-ax[0][0].set_title("Długość działki kielicha")
-
-ax[1][0].hist(Szer_dzial_kiel, bins=8)
-ax[1][0].set_title("Szerokość działki kielicha")
-
-ax[2][0].hist(Dlug_plat, bins=8)
-ax[2][0].set_title("Długość płatka")
-
-ax[3][0].hist(Szer_plat, bins=8)
-ax[3][0].set_title("Szerokośc płatka")
-plt.savefig("Wykresy.pdf")
 plt.show()
