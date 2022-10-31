@@ -1,4 +1,4 @@
-import Func as F
+import Funkcje as F
 import matplotlib.pyplot as plt
 import pandas as pd
 
@@ -41,7 +41,8 @@ def tabela1(tabela_ID_gatunkow = None):
     # ktorych naglowki zadeklarowane sa dalej jako "kolumny"
     dane = [["Setosa", str(populacja_Gat1) + "(" + str(round(populacja_Gat1 / populacjaIrysow * 100, 1)).replace(".",",") + "%)"],
             ["Versicolor", str(populacja_Gat2) + "(" + str(round(populacja_Gat2 / populacjaIrysow * 100, 1)).replace(".",",") + "%)"],
-            ["Virginica", str(populacja_Gat3) + "(" + str(round(populacja_Gat3 / populacjaIrysow * 100, 1)).replace(".",",") + "%)"]]
+            ["Virginica", str(populacja_Gat3) + "(" + str(round(populacja_Gat3 / populacjaIrysow * 100, 1)).replace(".",",") + "%)"],
+            ["Razem", str(populacjaIrysow) + "(" + str(round(populacjaIrysow / populacjaIrysow * 100, 1)).replace(".",",") + "%)"]]
 
     kolumny = ["Gatunek", "Liczebność(%)"]
 
@@ -108,7 +109,7 @@ def tabela2(tab_dl_kiel=None, tab_sz_kiel=None, tab_dl_plat=None, tab_sz_plat=No
               str("{:.2f}".format(F.mediana(tab_sz_plat))).replace(".",",")+"("+str("{:.2f}".format(F.kwartyl(tab_sz_plat, 1))).replace(".",",")+"-"+str("{:.2f}".format(F.kwartyl(tab_sz_plat,3))).replace(".",",")+")",
               str(F.maks(tab_sz_plat)).replace(".", ",")]]
 
-    df=pd.DataFrame(dane, columns=kolumny)
+    df = pd.DataFrame(dane, columns=kolumny)
 
     ax = plt.table(cellText=df.values, colLabels=df.columns, loc='center', cellLoc='center', colWidths=[0.30,0.12,0.22,0.15,0.1])
 

@@ -23,7 +23,7 @@ def wykresy(Dlug_dzial_kiel=None, Szer_dzial_kiel=None, Dlug_plat=None, Szer_pla
         Dlug_dzial_kiel = []
 
     # ustalam rozmiar okna na ktorym będą wyświetlane wykresy
-    plt.rcParams["figure.figsize"] = [15.00, 12.00]
+    plt.rcParams["figure.figsize"] = [10.00, 12.00]
     fig, ax = plt.subplots(4, 2, tight_layout=True)
 
 
@@ -57,21 +57,21 @@ def wykresy(Dlug_dzial_kiel=None, Szer_dzial_kiel=None, Dlug_plat=None, Szer_pla
     g3 = 'virginica'
 
     # deklaruje tablice zawierające informacje o poszczegolnych cechach dla danych gatunkow
-    Dlug_dzial_kiel_g1 = [None]*50
-    Dlug_dzial_kiel_g2 = [None]*50
-    Dlug_dzial_kiel_g3 = [None]*50
+    Dlug_dzial_kiel_g1 = [0]*50
+    Dlug_dzial_kiel_g2 = [0]*50
+    Dlug_dzial_kiel_g3 = [0]*50
 
-    Szer_dzial_kiel_g1 = [None]*50
-    Szer_dzial_kiel_g2 = [None]*50
-    Szer_dzial_kiel_g3 = [None]*50
+    Szer_dzial_kiel_g1 = [0]*50
+    Szer_dzial_kiel_g2 = [0]*50
+    Szer_dzial_kiel_g3 = [0]*50
 
-    Dlug_plat_g1 = [None]*50
-    Dlug_plat_g2 = [None]*50
-    Dlug_plat_g3 = [None]*50
+    Dlug_plat_g1 = [0]*50
+    Dlug_plat_g2 = [0]*50
+    Dlug_plat_g3 = [0]*50
 
-    Szer_plat_g1 = [None]*50
-    Szer_plat_g2 = [None]*50
-    Szer_plat_g3 = [None]*50
+    Szer_plat_g1 = [0]*50
+    Szer_plat_g2 = [0]*50
+    Szer_plat_g3 = [0]*50
 
     # wypelniam je wymaganymi danymi
     for i in range(50):
@@ -125,4 +125,5 @@ def wykresy(Dlug_dzial_kiel=None, Szer_dzial_kiel=None, Dlug_plat=None, Szer_pla
 
     # zapis wygenerowanych wykresów do pliku pdf
     plt.savefig("Wykresy.pdf")
+
 
