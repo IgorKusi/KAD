@@ -75,7 +75,7 @@ def odch_stand(tabela_danych=None):
     for i in range(len(tabela_danych)):
         wariancja=wariancja+((tabela_danych[i]-srednia)*(tabela_danych[i]-srednia))
 
-    wariancja=wariancja/len(tabela_danych)
+    wariancja=wariancja/len(tabela_danych)-1
 
     return "{:.2f}".format(round(np.sqrt(wariancja),2))
 

@@ -24,6 +24,7 @@ tabela_ID_gatunkow = ID_Gat.squeeze()
 W.wykresy(Dlug_dzial_kiel,Szer_dzial_kiel,Dlug_plat,Szer_plat,tabela_dlugosci_dzialki_kielicha,tabela_szerokosci_dzialki_kielicha,tabela_dlugosci_platka,tabela_szerokosci_platka)
 
 T.tabela1(tabela_ID_gatunkow)
+
 T.tabela2(tabela_dlugosci_dzialki_kielicha,tabela_szerokosci_dzialki_kielicha,tabela_dlugosci_platka,tabela_szerokosci_platka)
 
 plt.show()
