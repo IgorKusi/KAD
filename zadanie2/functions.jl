@@ -24,7 +24,7 @@ end
 function avg(arr::Vector{Float64}) 
     summ = 0
     for i in range(1,lastindex(arr))
-        summ = summ + i
+        summ = summ + arr[i]
     end
     return summ/lastindex(arr)
 end
@@ -58,7 +58,8 @@ function Pearson(arrX::Vector{Float64}, arrY::Vector{Float64})
    return (cov(arrX, arrY))/(sd(arrX)*sd(arrY))
 end
 
-function regLine(arrX::Vector{Float64}, arrY::Vector{Float64})
+#funkcja zwracajaca wspolczynnik kierunkowy a regresji liniowej 
+function regLine_A(arrX::Vector{Float64}, arrY::Vector{Float64})
     #https://www.statystyczny.pl/regresja-liniowa/
 
     #krok 1 - obliczam roznice miedzy x, a avg(x); tak samo dla y  
@@ -96,14 +97,42 @@ function regLine(arrX::Vector{Float64}, arrY::Vector{Float64})
         sumArrDeltaXsquare = sumArrDeltaXsquare + arrDeltaXsquare[i]
     end
 
-    #krok 5 - obliczam a oraz b  
+    #krok 5 - obliczam a 
     a = sumArrDeltasMultiplied / sumArrDeltaXsquare
+    return a;
 
+end
+
+function regLine_B(arrX::Vector{Float64}, arrY::Vector{Float64})
+    avgX = avg(arrX)
+    avgY = avg(arrY)
+    a = regLine_A(arrX, arrY)
     b = avgY - (a * avgX)
+    
+    return b
+end
 
-    #w tej formie, cala ta funckja zwroci b jako wynik ostatniego dzialania
-    #poki co zostawiam to tak jak jest, bo nie wiem jak bedziemy korzystac z tych wartosci 
+function regLine_Wzor(arrX::Vector{Float64}, arrY::Vector{Float64})
+    #poki co zostawiam to tak jak jest - w 3 osobnych funkcjach - bo nie wiem jak bedziemy korzystac z tych wartosci 
     #i nie znam sie na Julce (kiedys z jedna krecilem i mnie olała)
     #(jestem zemstą)
+    #(sth in the way, mmmmmmm mmmmm )
+
+    a = regLine_A(arrX, arrY)
+    b = regLine_B(arrX, arrY)
+
+    wzor = string("y = ", round(a; digits = 1), "x")
+    if b > 0
+        wzor = string(wzor,  " + ", round(b; digits=1))
+        return wzor
+    end
     
+    if b == 0 
+        return wzor
+    end
+
+    if b < 0 
+        wzor = string(wzor, " - ", abs(round(b; digits=1)))
+        return wzor
+    end
 end

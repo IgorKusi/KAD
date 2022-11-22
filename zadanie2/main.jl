@@ -3,8 +3,7 @@ using DataFrames
 
 include("functions.jl")
 
-#TODO osobny plik na wykresy, ustalic z jakiej biblioteki bedizemy korzstac do tego 
-#TODO sprawdzic czy funckje statystyczne dzialaja jak powinny - porownac z tym co na stronie przedmiotu, ewentualnie zrobic w excelu 
+#TODO - juz tylko wykresy
 
 
 #_______________________________________________________WCZYTYWANIE Z PLIKU_______________________________________________________#
@@ -18,19 +17,35 @@ df = CSV.read("dane.csv", header = col_names, DataFrame)                        
 # |
 # V
 #dfDDK = CSV.read("dane.csv", header = col_names, select = [:DDK], DataFrame)            #zasysam tylko kolumne z labelem "DDK"
-#dfSDK = CSV.read("dane.csv", header = col_names, select = [:SDK], DataFrame)            
-#dfDP = CSV.read("dane.csv", header = col_names, select = [:DP], DataFrame)
-#dfSP = CSV.read("dane.csv", header = col_names, select = [:SP], DataFrame)
-#dfGatunek = CSV.read("dane.csv", header = col_names, select = [:Gatunek], DataFrame)
 
-DDK = df.DDK                                                            #konwertuje kolumne DataFrame na vector floatow (yes, indeed it is that simple)
-SDK = df.SDK                                                            #vector to własciwie alias dla typu Array{T, 1} gdzie T to typ zmiennych
-DP = df.DP                                                              #w ten sam spobób jak Matrix to Array{T, 2}
+
+DDK = df.DDK                     #konwertuje kolumne DataFrame na vector floatow (yes, indeed it is that simple)
+SDK = df.SDK                     #vector to własciwie alias dla typu Array{T, 1} gdzie T to typ zmiennych
+DP = df.DP                       #w ten sam spobób jak Matrix to Array{T, 2}
 SP = df.SP
 Gatunek = df.Gatunek
 
+#______________________________jakies printy do testowania___________________________#
 
-#print(typeof(DDK),"\n", DDK, "\n","\n",typeof(SDK),"\n",SDK,"\n","\n",typeof(DP),"\n",DP,"\n","\n",typeof(SP),"\n",SP,"\n","\n",typeof(Gatunek),"\n",Gatunek )
+print(typeof(DDK), "-> DDK","\n", DDK, "\n", "\n",
+        typeof(SDK),"-> SDK","\n", SDK,"\n","\n",    
+        typeof(DP),"-> DP","\n", DP,"\n","\n",
+        typeof(SP),"-> SP","\n", SP,"\n","\n",
+        typeof(Gatunek),"-> Gatunek","\n",Gatunek )
 
-print(Pearson(SDK, DDK))
-print("\n", regLine(DDK, SDK))
+print("\n","\n","\n","Długość działki kielicha: ", "\n")
+print("min: ", mini(DDK), "\n")
+print("max: ", maxi(DDK), "\n")
+print("avg: ", avg(DDK), "\n")
+print("sd: ", sd(DDK), "\n")
+
+print("\n","Szerokość płatka: ", "\n")
+print("min: ", mini(SP), "\n")
+print("max: ", maxi(SP), "\n")
+print("avg: ", avg(SP), "\n")
+print("sd: ", sd(SP), "\n")
+
+print("\n","Pearson DDK, SDK: ",round(Pearson(DDK,SDK); digits = 2 ), "\n")
+
+print("\n", "Regline DDK SDK", "\n")
+print("a: ", regLine_A(DDK,SDK), "\n" ,"b: ", regLine_B(DDK,SDK), "\n", "wzor: ",regLine_Wzor(DDK, SDK), "\n")
