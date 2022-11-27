@@ -1,5 +1,5 @@
 #minimum tablicy 
-function mini(arr::Vector)
+function mini(arr::Vector{<:Real})
     var = arr[1] #Julia indeksuje tablice od 1 nie od 0
     for i in range(1, lastindex(arr))
         if arr[i]< var
@@ -10,7 +10,7 @@ function mini(arr::Vector)
 end
 
 #maksimum tablicy 
-function maxi(arr::Vector)
+function maxi(arr::Vector{<:Real})
     var = arr[1] #Julia indeksuje tablice od 1 nie od 0
     for i in range(1,lastindex(arr))
         if arr[i]> var
@@ -21,7 +21,7 @@ function maxi(arr::Vector)
 end
 
 #średnia arytmetyczna 
-function avg(arr::Vector) 
+function avg(arr::Vector{<:Real}) 
     summ = 0
     for i in range(1,lastindex(arr))
         summ = summ + arr[i]
@@ -30,8 +30,8 @@ function avg(arr::Vector)
 end
 
 #kowariancja pomiedzy X a Y 
-function cov(arrX::Vector, arrY::Vector)
-    pr::Vector = []
+function cov(arrX::Vector{<:Real}, arrY::Vector{<:Real})
+    pr::Vector{Real} = []
     for i in range(1, lastindex(arrX))
         push!(pr, arrX[i] * arrY[i])
     end
@@ -45,7 +45,7 @@ function cov(arrX::Vector, arrY::Vector)
 end
 
 #odchylenie standardowe z populacji
-function sd(arr::Vector) 
+function sd(arr::Vector{<:Real}) 
     av = avg(arr)
     summ = 0
     for i in range(1,lastindex(arr))
@@ -54,12 +54,12 @@ function sd(arr::Vector)
     return sqrt(summ/lastindex(arr))
 end
 
-function Pearson(arrX::Vector, arrY::Vector)
+function Pearson(arrX::Vector{<:Real}, arrY::Vector{<:Real})
    return (cov(arrX, arrY))/(sd(arrX)*sd(arrY))
 end
 
 #funkcja zwracajaca wspolczynnik kierunkowy a regresji liniowej 
-function regLine_A(arrX::Vector, arrY::Vector)
+function regLine_A(arrX::Vector{<:Real}, arrY::Vector{<:Real})
     #https://www.statystyczny.pl/regresja-liniowa/
 
     #krok 1 - obliczam roznice miedzy x, a avg(x); tak samo dla y  
@@ -103,16 +103,24 @@ function regLine_A(arrX::Vector, arrY::Vector)
     
 end
 
-function regLine_B(arrX::Vector, arrY::Vector)
+function regLine_B(arrX::Vector{<:Real}, arrY::Vector{<:Real}, regA = regLine_A(arrX, arrY))
     avgX = avg(arrX)
     avgY = avg(arrY)
-    a = regLine_A(arrX, arrY)
-    b = avgY - (a * avgX)
+    b = avgY - (regA * avgX)
     
     return b
 end
 
-function regLine_Wzor(arrX::Vector, arrY::Vector)
+# function regLine_B(arrX::Vector{<:Real}, arrY::Vector{<:Real})
+#     avgX = avg(arrX)
+#     avgY = avg(arrY)
+#     a = regLine_A(arrX, arrY)
+#     b = avgY - (a * avgX)
+    
+#     return b
+# end
+
+function regLine_Wzor(arrX::Vector{<:Real}, arrY::Vector{<:Real})
     #poki co zostawiam to tak jak jest - w 3 osobnych funkcjach - bo nie wiem jak bedziemy korzystac z tych wartosci 
     #i nie znam sie na Julce (kiedys z jedna krecilem i mnie olała)
     #(jestem zemstą)
@@ -135,4 +143,8 @@ function regLine_Wzor(arrX::Vector, arrY::Vector)
         wzor = string(wzor, " - ", abs(round(b; digits=1)))
         return wzor
     end
+end
+
+function regLine_Wzor(a::Real, b::Real)
+    return """y = $(round(a, digits = 1))x $(b > 0 ? "+" : (b == 0 ? "" : "-")) $(abs(round(b, digits = 1)))""";
 end
