@@ -44,14 +44,14 @@ function cov(arrX::Vector{<:Real}, arrY::Vector{<:Real})
 
 end
 
-#odchylenie standardowe z populacji
+#odchylenie standardowe z próby
 function sd(arr::Vector{<:Real}) 
     av = avg(arr)
     summ = 0
     for i in range(1,lastindex(arr))
         summ = summ + ((arr[i] - av)*(arr[i] - av))
     end
-    return sqrt(summ/lastindex(arr))
+    return sqrt(summ/(lastindex(arr)-1))
 end
 
 function Pearson(arrX::Vector{<:Real}, arrY::Vector{<:Real})
@@ -60,7 +60,7 @@ end
 
 #funkcja zwracajaca wspolczynnik kierunkowy a regresji liniowej 
 function regLine_A(arrX::Vector{<:Real}, arrY::Vector{<:Real})
-    #https://www.statystyczny.pl/regresja-liniowa/
+    
 
     #krok 1 - obliczam roznice miedzy x, a avg(x); tak samo dla y  
    
@@ -111,20 +111,9 @@ function regLine_B(arrX::Vector{<:Real}, arrY::Vector{<:Real}, regA = regLine_A(
     return b
 end
 
-# function regLine_B(arrX::Vector{<:Real}, arrY::Vector{<:Real})
-#     avgX = avg(arrX)
-#     avgY = avg(arrY)
-#     a = regLine_A(arrX, arrY)
-#     b = avgY - (a * avgX)
-    
-#     return b
-# end
 
 function regLine_Wzor(arrX::Vector{<:Real}, arrY::Vector{<:Real})
-    #poki co zostawiam to tak jak jest - w 3 osobnych funkcjach - bo nie wiem jak bedziemy korzystac z tych wartosci 
-    #i nie znam sie na Julce (kiedys z jedna krecilem i mnie olała)
-    #(jestem zemstą)
-    #(sth in the way, mmmmmmm mmmmm )
+
 
     a = regLine_A(arrX, arrY)
     b = regLine_B(arrX, arrY)
